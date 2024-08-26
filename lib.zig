@@ -49,6 +49,14 @@ pub const Vector = struct {
             value.* /= mag;
         }
     }
+
+    pub fn euclideanDistance(self: Vector, other: Vector) f32 {
+        var distance: f32 = 0;
+        for (self.data, other.data) |a, b| {
+            distance += (a - b) * (a - b);
+        }
+        return @sqrt(distance);
+    }
 };
 
 pub fn main() !void {
