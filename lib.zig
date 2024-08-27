@@ -22,6 +22,33 @@ pub const Vector = struct {
         allocator.free(self.data);
     }
 
+    //implement all vector operations
+    pub fn add(self: Vector, other: Vector, allocator: std.mem.Allocator) !Vector {
+        std.debug.assert(self.dimensions == other.dimensions);
+        var result = try Vector.init(allocator, self.dimensions);
+        for (self.data, other.data, 0..) |a, b, i| {
+            result.data[i] = a + b;
+        }
+        return result;
+    }
+
+    pub fn subtract(self: Vector, other: Vector, allocator: std.mem.Allocator) !Vector {
+        std.debug.assert(self.dimensions == other.dimensions);
+        var result = try Vector.init(allocator, self.dimensions);
+        for (self.data, other.data, 0..) |a, b, i| {
+            result.data[i] = a + b;
+        }
+        return result;
+    }
+
+    pub fn scale(self: Vector, scalar: f32, allocator: std.mem.Allocator) !Vector {
+        var result = try Vector.init(allocator, self.dimensions);
+        for (self.data, 0..) |a, i| {
+            result.data[i] = a * scalar;
+        }
+        return result;
+    }
+
     // dot product
     pub fn dot(self: Vector, other: Vector) f32 {
         std.debug.assert(self.dimensions == other.dimensions);
